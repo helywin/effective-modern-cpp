@@ -2,7 +2,6 @@
 // Created by helywin on 2020/7/12.
 //
 
-#include "template.hpp"
 #include <iostream>
 #include <boost/type_index.hpp>
 #include <iomanip>
@@ -66,7 +65,7 @@ void deducing_template()
     const int *const cpc_x = &x;
     const char *const cpc_s = "123456";
     const char cp_s[] = "123456";
-    cout << "----ref----" << endl;
+    cout << "----void func_ref(T &param)----" << endl;
     IN_TYPE(x)
     func_ref(x);
     IN_TYPE(c_x)
@@ -74,7 +73,7 @@ void deducing_template()
     IN_TYPE(cr_x)
     func_ref(cr_x);
 
-    cout << "----const_ref----" << endl;
+    cout << "----void func_const_ref(const T &param)----" << endl;
     IN_TYPE(x)
     func_const_ref(x);
     IN_TYPE(c_x)
@@ -82,7 +81,7 @@ void deducing_template()
     IN_TYPE(cr_x)
     func_const_ref(cr_x);
 
-    cout << "----pointer----" << endl;
+    cout << "----void func_pointer(T *param)----" << endl;
     IN_TYPE(x)
     func_pointer(&x);
     IN_TYPE(cp_x)
@@ -94,7 +93,7 @@ void deducing_template()
     IN_TYPE(cp_s)
     func_pointer(cp_s);
 
-    cout << "----universal_ref----" << endl;
+    cout << "----void func_universal_ref(T &&param)----" << endl;
     IN_TYPE(x)
     func_universal_ref(x);
     IN_TYPE(c_x)
@@ -104,7 +103,7 @@ void deducing_template()
     IN_TYPE(0)
     func_universal_ref(0);
 
-    cout << "----copy----" << endl;
+    cout << "----void func(T param)----" << endl;
     IN_TYPE(x)
     func(x);
     IN_TYPE(c_x)
