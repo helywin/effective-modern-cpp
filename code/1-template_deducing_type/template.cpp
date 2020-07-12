@@ -56,7 +56,7 @@ constexpr std::size_t arraySize(T (&)[N]) noexcept
     return N;
 }
 
-void deducing_template()
+void template_deducing()
 {
     int x = 0;
     const int c_x = x;
