@@ -126,5 +126,5 @@ void template_deducing()
 
 int main()
 {
-    deducing_template();
+    template_deducing();
 }
