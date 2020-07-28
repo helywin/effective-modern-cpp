@@ -14,30 +14,30 @@ decltype(auto) move(T &&param)
     return static_cast<T>(param);
 }
 
-class Test
+class Test1
 {
 public:
-    Test(const int &lval)
+    Test1(const int &lval)
     {
         std::cout << "Test(const int &lval)" << std::endl;
     }
 
-    Test(int &&rval)
+    Test1(int &&rval)
     {
         std::cout << "Test(int &&rval)" << std::endl;
     }
 };
 
 template<typename T>
-Test factory1(T &&param)
+Test1 factory1(T &&param)
 {
-    return Test(std::forward<T>(param));
+    return Test1(std::forward<T>(param));
 }
 
 template<typename T>
-Test factory2(T &&param)
+Test1 factory2(T &&param)
 {
-    return Test(std::move(param));
+    return Test1(std::move(param));
 }
 
 int main()
