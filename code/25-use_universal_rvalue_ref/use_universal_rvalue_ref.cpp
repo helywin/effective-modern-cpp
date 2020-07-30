@@ -37,6 +37,8 @@ template<typename ...T>
 void unwrapper(T ...args)
 {}
 
+// 递归解包和直接用c++17解包规则
+
 template<typename T, typename ...Args>
 void funcPrint(const T &t, Args ...arg)
 {
@@ -59,8 +61,26 @@ void write_line(const T &t, const Args &...data)
 
 
 template<typename ...Args>
-void printer(Args&&... args) {
+void printer(Args &&... args)
+{
     (std::cout << ... << args) << '\n';
+}
+
+class TestRVO
+{
+public:
+    TestRVO()
+    {
+        std::cout << "constructor" << std::endl;
+    }
+    TestRVO(const TestRVO &other) = default;
+    TestRVO &operator=(const TestRVO &rhs) = default;
+};
+
+//return value optimize
+TestRVO testRvoFunc() {
+    TestRVO rvo;
+    return std::move(rvo);
 }
 
 int main()
@@ -77,6 +97,6 @@ int main()
     std::cout << info.length() << std::endl;
 
     funcPrint(1, 2, 3);
-    printer(1,2,3);
-
+    printer(1, 2, 3);
+    auto a = testRvoFunc();
 }
