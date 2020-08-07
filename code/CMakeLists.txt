@@ -10,18 +10,13 @@ macro(SUBDIR_LIST result CURRENT_FOLDER)
     set(${result} ${dirlist})
 endmacro()
 
-macro(SUB_PROJECT)
-    string(REGEX REPLACE ".*/(.*)" "\\1" CURRENT_FOLDER ${CMAKE_CURRENT_SOURCE_DIR})
-    project(${CURRENT_FOLDER})
-    file(GLOB SRCS
-            ${CMAKE_CURRENT_SOURCE_DIR}/*.hpp
-            ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp
-            )
-    add_executable(${PROJECT_NAME} ${SRCS})
-endmacro()
-
 SUBDIR_LIST(SUBDIRS ${CMAKE_CURRENT_SOURCE_DIR})
 
 foreach (subdir ${SUBDIRS})
-    add_subdirectory(${subdir})
+    string(REGEX REPLACE ".*/(.*)" "\\1" CURRENT_FOLDER ${subdir})
+    file(GLOB SRCS
+            ${subdir}/*.hpp
+            ${subdir}/*.cpp
+            )
+    add_executable(${CURRENT_FOLDER} ${SRCS})
 endforeach ()
