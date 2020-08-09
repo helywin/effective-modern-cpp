@@ -11,12 +11,13 @@ using namespace std::literals;
 
 std::mutex printMutex;
 
-template <typename T>
+template<typename T>
 void printFunc(int start, int interval, T sec)
 {
     for (int i = start; i < start + interval; ++i) {
         printMutex.lock();
-        std::cout << std::this_thread::get_id() << ": " << i << std::endl;
+        std::cout << std::this_thread::get_id() << ": " << i << "  time: " <<
+                  std::chrono::system_clock::now().time_since_epoch().count() << std::endl;
         printMutex.unlock();
         std::this_thread::sleep_for(sec);
     }
